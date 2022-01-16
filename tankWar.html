@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank</title>
+    <link href="tankWar.css" rel="stylesheet" type="text/css" />
+    <script src="hilo/hilo-standalone copy.js">
+    </script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="src/game.js"></script>
+    <script type="text/javascript" src="src/Asset.js"></script>
+    <script type="text/javascript" src="src/AIPlayer.js"></script>
+    <script type="text/javascript" src="src/activeObj.js"></script>
+    <script type="text/javascript" src="src/bullet.js"></script>
+    <script type="text/javascript" src="src/tank.js"></script>
+    <script type="text/javascript" src="src/userInput.js"></script>
+    <script type="text/javascript" src="src/block.js"></script>
+    <script type="text/javascript" src="src/base.js"></script>
+    <script type="text/javascript" src="src/level.js"></script>
+
+</head>
+
+<body>
+
+    <div style="width: 200px;" id="conf">
+        <p>输入用户名以开始游戏：</p>
+        <input type="text" id="username">
+        <br>
+        <input type="button" onclick="startGame()" value="start game!">
+
+    </div>
+
+</body>
+<script>
+    function startGame() {
+        var name;
+        var users = '<p>用户列表及其最高分：</p>';
+        name = document.getElementById("username").value;
+        if (name == '') return;
+        for (let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+
+            users += `<p>&nbsp;${key}: ${localStorage.getItem(key)}</p>`
+        }
+        document.getElementById("conf").innerHTML = '<p>用户：</p>' +
+            '<p id="user">' + name + '</p>' +
+            '<p>分数：</p>' +
+            '<p id="score">0</p>' +
+            '<p>当前关卡：</p>' +
+            '<p id="level">1</p>' +
+            '<p>敌人数量：</p>' +
+            '<p id="enemy">0</p>' +
+            '<p>我方坦克数量：</p>' +
+            '<p id="myTank"></p>' + users;
+        game.start(name);
+    }
+</script>
+
+</html>
